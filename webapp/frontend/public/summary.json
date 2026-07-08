@@ -1,6 +1,6 @@
 {
   "title": "Quina",
-  "subtitle": "لوحة منظمة لعرض حالة البيانات والنماذج",
+  "subtitle": "",
   "raw_counts": {
     "drawings": 1,
     "hentai": 1,
@@ -29,34 +29,80 @@
     "train": 0,
     "test": 0
   },
-  "recent_events": [
+  "source_catalog": [
     {
-      "title": "drawings",
-      "detail": "urls_drawings.txt",
-      "time": "2026-07-08 12:30"
+      "key": "drawings",
+      "label": "رسومات",
+      "file": "urls_drawings.txt",
+      "url_count": 15566,
+      "raw_count": 1,
+      "train_count": 0,
+      "test_count": 0
     },
     {
-      "title": "hentai",
-      "detail": "urls_hentai.txt",
-      "time": "2026-07-08 12:30"
+      "key": "hentai",
+      "label": "هنتاي",
+      "file": "urls_hentai.txt",
+      "url_count": 4611,
+      "raw_count": 1,
+      "train_count": 0,
+      "test_count": 0
     },
     {
-      "title": "neutral",
-      "detail": "urls_neutral.txt",
-      "time": "2026-07-08 12:30"
+      "key": "neutral",
+      "label": "حيادي",
+      "file": "urls_neutral.txt",
+      "url_count": 36837,
+      "raw_count": 1,
+      "train_count": 0,
+      "test_count": 0
     },
     {
-      "title": "porn",
-      "detail": "urls_porn.txt",
-      "time": "2026-07-08 12:30"
+      "key": "porn",
+      "label": "إباحية",
+      "file": "urls_porn.txt",
+      "url_count": 57289,
+      "raw_count": 1,
+      "train_count": 0,
+      "test_count": 0
     },
     {
-      "title": "sexy",
-      "detail": "urls_sexy.txt",
-      "time": "2026-07-08 12:30"
+      "key": "sexy",
+      "label": "مثير",
+      "file": "urls_sexy.txt",
+      "url_count": 15957,
+      "raw_count": 1,
+      "train_count": 0,
+      "test_count": 0
     }
   ],
-  "last_build": "2026-07-08 12:31",
-  "service_state": "ready",
-  "note": "تمت قراءة بيانات المشروع محليًا بنجاح."
+  "recent_events": [
+    {
+      "title": "رسومات",
+      "detail": "urls_drawings.txt",
+      "time": "2026-07-08 12:49"
+    },
+    {
+      "title": "هنتاي",
+      "detail": "urls_hentai.txt",
+      "time": "2026-07-08 12:49"
+    },
+    {
+      "title": "حيادي",
+      "detail": "urls_neutral.txt",
+      "time": "2026-07-08 12:49"
+    },
+    {
+      "title": "إباحية",
+      "detail": "urls_porn.txt",
+      "time": "2026-07-08 12:49"
+    },
+    {
+      "title": "مثير",
+      "detail": "urls_sexy.txt",
+      "time": "2026-07-08 12:49"
+    }
+  ],
+  "last_build": "2026-07-08 12:49",
+  "service_state": "ready"
 }
