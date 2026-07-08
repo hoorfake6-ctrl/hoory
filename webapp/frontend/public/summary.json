@@ -1,0 +1,62 @@
+{
+  "title": "Quina",
+  "subtitle": "لوحة منظمة لعرض حالة البيانات والنماذج",
+  "raw_counts": {
+    "drawings": 1,
+    "hentai": 1,
+    "neutral": 1,
+    "porn": 1,
+    "sexy": 1
+  },
+  "splits": {
+    "train": {
+      "drawings": 0,
+      "hentai": 0,
+      "neutral": 0,
+      "porn": 0,
+      "sexy": 0
+    },
+    "test": {
+      "drawings": 0,
+      "hentai": 0,
+      "neutral": 0,
+      "porn": 0,
+      "sexy": 0
+    }
+  },
+  "totals": {
+    "raw": 5,
+    "train": 0,
+    "test": 0
+  },
+  "recent_events": [
+    {
+      "title": "drawings",
+      "detail": "urls_drawings.txt",
+      "time": "2026-07-08 12:30"
+    },
+    {
+      "title": "hentai",
+      "detail": "urls_hentai.txt",
+      "time": "2026-07-08 12:30"
+    },
+    {
+      "title": "neutral",
+      "detail": "urls_neutral.txt",
+      "time": "2026-07-08 12:30"
+    },
+    {
+      "title": "porn",
+      "detail": "urls_porn.txt",
+      "time": "2026-07-08 12:30"
+    },
+    {
+      "title": "sexy",
+      "detail": "urls_sexy.txt",
+      "time": "2026-07-08 12:30"
+    }
+  ],
+  "last_build": "2026-07-08 12:31",
+  "service_state": "ready",
+  "note": "تمت قراءة بيانات المشروع محليًا بنجاح."
+}
