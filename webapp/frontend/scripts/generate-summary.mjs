@@ -3,7 +3,26 @@ import fs from "fs";
 import path from "path";
 
 const cwd = process.cwd();
-const root = path.resolve(cwd, "../..");
+
+function locateRoot() {
+  const candidates = [
+    path.resolve(cwd, "../.."),
+    path.resolve(cwd, "../../.."),
+    path.resolve(cwd, "../../../nsfw_data_scraper-main/nsfw_data_scraper-main"),
+    path.resolve(cwd, "../../nsfw_data_scraper-main/nsfw_data_scraper-main"),
+    path.resolve(cwd, "../../../../nsfw_data_scraper-main/nsfw_data_scraper-main"),
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(path.join(candidate, "raw_data")) || fs.existsSync(path.join(candidate, "data"))) {
+      return candidate;
+    }
+  }
+
+  return path.resolve(cwd, "../..");
+}
+
+const root = locateRoot();
 const rawDir = path.join(root, "raw_data");
 const dataDir = path.join(root, "data");
 const categories = ["drawings", "hentai", "neutral", "porn", "sexy"];

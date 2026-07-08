@@ -1,12 +1,39 @@
+
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 
 const cwd = process.cwd();
-const root = path.resolve(cwd, "../..");
+
+function locateRoot() {
+  const candidates = [
+    path.resolve(cwd, "../.."),
+    path.resolve(cwd, "../../.."),
+    path.resolve(cwd, "../../../nsfw_data_scraper-main/nsfw_data_scraper-main"),
+    path.resolve(cwd, "../../nsfw_data_scraper-main/nsfw_data_scraper-main"),
+    path.resolve(cwd, "../../../../nsfw_data_scraper-main/nsfw_data_scraper-main"),
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(path.join(candidate, "raw_data")) || fs.existsSync(path.join(candidate, "data"))) {
+      return candidate;
+    }
+  }
+
+  return path.resolve(cwd, "../..");
+}
+
+const root = locateRoot();
 const rawDir = path.join(root, "raw_data");
 const dataDir = path.join(root, "data");
 const categories = ["drawings", "hentai", "neutral", "porn", "sexy"];
+
+const labels = {
+  drawings: "رسومات",
+  hentai: "هنتاي",
+  neutral: "حيادي",
+  porn: "إباحية",
+  sexy: "مثير",
+};
 
 function countFiles(baseDir) {
   let total = 0;
@@ -23,10 +50,16 @@ function countFiles(baseDir) {
   return total;
 }
 
+function countLines(filePath) {
+  if (!fs.existsSync(filePath)) return 0;
+  const content = fs.readFileSync(filePath, "utf8");
+  return content.split(/\r?\n/).filter(Boolean).length;
+}
+
 function latestEvent(category) {
   const folder = path.join(rawDir, category);
   if (!fs.existsSync(folder)) {
-    return { title: category, detail: "لا توجد ملفات حديثة", time: "—" };
+    return { title: category, detail: "—", time: "—" };
   }
 
   let latestPath = null;
@@ -47,10 +80,10 @@ function latestEvent(category) {
     }
   }
 
-  if (!latestPath) return { title: category, detail: "لا توجد ملفات حديثة", time: "—" };
+  if (!latestPath) return { title: category, detail: "—", time: "—" };
 
   return {
-    title: category,
+    title: labels[category] || category,
     detail: path.basename(latestPath),
     time: new Date(latestMtime).toISOString().slice(0, 16).replace("T", " "),
   };
@@ -65,6 +98,19 @@ const splits = {
   test: Object.fromEntries(categories.map((cat) => [cat, countFiles(path.join(dataDir, "test", cat))])),
 };
 
+const source_catalog = categories.map((cat) => {
+  const sourceFile = path.join(rawDir, cat, `urls_${cat}.txt`);
+  return {
+    key: cat,
+    label: labels[cat] || cat,
+    file: `urls_${cat}.txt`,
+    url_count: countLines(sourceFile),
+    raw_count: raw_counts[cat],
+    train_count: splits.train[cat],
+    test_count: splits.test[cat],
+  };
+});
+
 const totals = {
   raw: Object.values(raw_counts).reduce((a, b) => a + b, 0),
   train: Object.values(splits.train).reduce((a, b) => a + b, 0),
@@ -73,14 +119,14 @@ const totals = {
 
 const summary = {
   title: "Quina",
-  subtitle: "لوحة منظمة لعرض حالة البيانات والنماذج",
+  subtitle: "",
   raw_counts,
   splits,
   totals,
+  source_catalog,
   recent_events: categories.map(latestEvent),
   last_build: new Date().toISOString().slice(0, 16).replace("T", " "),
   service_state: totals.raw > 0 ? "ready" : "temporary_issue",
-  note: totals.raw > 0 ? "تمت قراءة بيانات المشروع محليًا بنجاح." : "البيانات غير مكتملة حاليًا، لذلك يظهر الوضع كتعطل مؤقت.",
 };
 
 const outDir = path.join(cwd, "public");
