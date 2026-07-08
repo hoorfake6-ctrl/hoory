@@ -1433,6 +1433,7 @@ function App() {
                         setSelectedChapterIndex(index);
                         setSelectedPageIndex(0);
                         recordHistory(selectedItem, chapter.title);
+                        openWatch(selectedItem, index);
                       }}
                     >
                       <div className="chapter-main">
