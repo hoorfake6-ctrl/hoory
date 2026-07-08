@@ -726,6 +726,15 @@ function App() {
     setMenuOpen(false);
   }
 
+  function openChapter(item, chapterIndex = 0) {
+    setSelectedItemId(item.id);
+    setSelectedChapterIndex(chapterIndex);
+    setSelectedPageIndex(0);
+    recordHistory(item, `فصل ${chapterIndex + 1}`);
+    setActiveView("watch");
+    setMenuOpen(false);
+  }
+
   function toggleFavorite(item) {
     setFavorites((prev) => {
       const exists = prev.includes(item.id);
@@ -1429,12 +1438,7 @@ function App() {
                     <button
                       key={chapter.id}
                       className={cn("chapter-row", index === selectedChapterIndex && "active")}
-                      onClick={() => {
-                        setSelectedChapterIndex(index);
-                        setSelectedPageIndex(0);
-                        recordHistory(selectedItem, chapter.title);
-                        openWatch(selectedItem, index);
-                      }}
+                      onClick={() => openWatch(selectedItem, index)}
                     >
                       <div className="chapter-main">
                         <div className="chapter-title">{chapter.title}</div>
